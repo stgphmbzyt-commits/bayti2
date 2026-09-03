@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#075c43">
+<title>بيتي | بوابتك لكل عقارات العراق</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+background:#f5f7f6;
+color:#14231e
+}
+:root{
+--g:#075c43;
+--g2:#0b7a58;
+--lime:#8bc53f;
+--muted:#718079;
+--card:#fff;
+--line:#e4eae7
+}
+.app{
+max-width:520px;
+margin:auto;
+min-height:100vh;
+background:#f5f7f6;
+padding-bottom:82px
+}
+header{
+background:linear-gradient(135deg,#064b38,#0a7655);
+color:#fff;
+padding:18px 18px 22px;
+border-radius:0 0 24px 24px
+}
+.top{
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+.logo{font-size:30px;font-weight:900}
+.tag{font-size:11px;opacity:.82}
+.search{
+margin-top:17px;
+background:#fff;
+border-radius:14px;
+padding:12px 14px;
+color:#8b9893;
+display:flex;
+gap:8px;
+align-items:center
+}
+.tabs{
+display:flex;
+gap:8px;
+margin-top:13px
+}
+.tab{
+flex:1;
+border:0;
+padding:12px;
+border-radius:12px;
+font-weight:800;
+background:#fff;
+color:var(--g)
+}
+.tab.active{
+background:var(--lime);
+color:#17341f
+}
+main{padding:16px}
+.title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:10px 0 12px
+}
+.title h2{
+font-size:18px;
+margin:0
+}
+.link{
+color:var(--g2);
+font-size:13px;
+font-weight:700
+}
+.types{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px
+}
+.type{
+background:#fff;
+border:1px solid var(--line);
+border-radius:14px;
+padding:14px 6px;
+text-align:center;
+font-weight:800;
+font-size:13px
+}
+.ico{
+font-size:24px;
+display:block;
+margin-bottom:6px
+}
+.cards{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+.card{
+background:#fff;
+border-radius:16px;
+overflow:hidden;
+border:1px solid var(--line);
+box-shadow:0 3px 12px #0b3d2b0b
+}
+.photo{
+height:130px;
+background:linear-gradient(135deg,#dfe8e3,#a9c7b8);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px
+}
+.body{padding:10px}
+.badge{
+display:inline-block;
+background:#eaf6df;
+color:#3f7e16;
+border-radius:7px;
+padding:3px 6px;
+font-size:10px;
+font-weight:800
+}
+.name{
+font-weight:850;
+margin:7px 0 5px;
+font-size:14px
+}
+.meta{
+font-size:11px;
+color:var(--muted);
+line-height:1.7
+}
+.price{
+color:var(--g);
+font-weight:900;
+font-size:13px;
+margin-top:5px
+}
+.bottom{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:min(520px,100%);
+height:70px;
+background:#fff;
+border-top:1px solid var(--line);
+display:flex;
+justify-content:space-around;
+align-items:center;
+z-index:20
+}
+.nav{
+border:0;
+background:none;
+color:#7a8781;
+font-size:11px;
+font-weight:700
+}
+.nav span{
+display:block;
+font-size:22px;
+margin-bottom:2px
+}
+.nav.active{color:var(--g)}
+.add{
+width:55px;
+height:55px;
+border-radius:18px;
+border:0;
+background:var(--g);
+color:#fff;
+font-size:29px;
+box-shadow:0 7px 20px #075c4350;
+margin-top:-25px
+}
+.page{display:none}
+.page.active{display:block}
+.form{
+background:#fff;
+border:1px solid var(--line);
+border-radius:16px;
+padding:14px;
+margin-bottom:12px
+}
+.form label{
+font-size:12px;
+font-weight:800;
+display:block;
+margin:0 0 7px
+}
+.form input,
+.form select,
+.form textarea{
+width:100%;
+padding:12px;
+border:1px solid var(--line);
+border-radius:11px;
+font-size:14px;
+background:#fafcfb;
+outline:none
+}
+.form textarea{
+min-height:100px;
+resize:vertical
+}
+.btn{
+width:100%;
+padding:14px;
+border:0;
+border-radius:12px;
+background:var(--g);
+color:#fff;
+font-size:15px;
+font-weight:900
+}
+.notice{
+padding:12px;
+border-radius:12px;
+background:#fff8df;
+color:#765d08;
+font-size:12px;
+line-height:1.8;
+margin-bottom:12px
+}
+.empty{
+text-align:center;
+padding:50px 20px;
+color:var(--muted);
+grid-column:1/-1
+}
+.loading{
+text-align:center;
+padding:30px;
+color:var(--muted);
+grid-column:1/-1
+}
+.status{
+font-size:11px;
+text-align:center;
+padding:8px;
+color:var(--muted)
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+<div class="top">
+<div>
+<div class="logo">بيتي</div>
+<div class="tag">بوابتك لكل عقارات العراق</div>
+</div>
+<div>🔔</div>
+</div>
+
+<div class="search" onclick="showPage('search')">
+🔎 <span>ابحث عن عقار، منطقة، أو محافظة...</span>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="setMode(this,'بيع')">🏷️ بيع</button>
+<button class="tab" onclick="setMode(this,'إيجار')">🔑 إيجار</button>
+</div>
+</header>
+
+<main>
+
+<section id="home" class="page active">
+
+<div class="title">
+<h2>اختر نوع العقار</h2>
+<span class="link" onclick="showPage('search')">عرض الكل</span>
+</div>
+
+<div class="types">
+<div class="type" onclick="quickType('بيت')"><span class="ico">🏠</span>بيوت</div>
+<div class="type" onclick="quickType('شقة')"><span class="ico">🏢</span>شقق</div>
+<div class="type" onclick="quickType('أرض')"><span class="ico">🌳</span>أراضي</div>
+<div class="type" onclick="quickType('محل')"><span class="ico">🏪</span>محلات</div>
+<div class="type" onclick="quickType('مكتب')"><span class="ico">🏬</span>مكاتب</div>
+<div class="type" onclick="quickType('بناية')"><span class="ico">🏗️</span>بنايات</div>
+</div>
+
+<div class="title">
+<h2>عقارات مميزة</h2>
+</div>
+
+<div id="featured" class="cards">
+<div class="loading">جارٍ تحميل العقارات...</div>
+</div>
+
+<div class="title">
+<h2>أحدث العقارات</h2>
+</div>
+
+<div id="latest" class="cards">
+<div class="loading">جارٍ تحميل العقارات...</div>
+</div>
+
+<div id="connectionStatus" class="status"></div>
+
+</section>
+
+
+<section id="search" class="page">
+
+<div class="title">
+<h2>البحث والفلترة</h2>
+</div>
+
+<div class="form">
+<label>المحافظة</label>
+<select id="sGov">
+<option value="">كل العراق</option>
+<option>بغداد</option>
+<option>البصرة</option>
+<option>النجف</option>
+<option>كربلاء</option>
+<option>بابل</option>
+<option>ذي قار</option>
+<option>نينوى</option>
+<option>أربيل</option>
+<option>السليمانية</option>
+</select>
+</div>
+
+<div class="form">
+<label>نوع العقار</label>
+<select id="sType">
+<option value="">الكل</option>
+<option>بيت</option>
+<option>شقة</option>
+<option>أرض</option>
+<option>محل</option>
+<option>مكتب</option>
+<option>بناية</option>
+</select>
+</div>
+
+<div class="form">
+<label>أقصى سعر بالدينار</label>
+<input id="sPrice" type="number" placeholder="مثلاً 200000000">
+</div>
+
+<button class="btn" onclick="runSearch()">عرض النتائج</button>
+
+<div class="title">
+<h2>النتائج</h2>
+</div>
+
+<div id="results" class="cards"></div>
+
+</section>
+
+
+<section id="add" class="page">
+
+<div class="title">
+<h2>إضافة عقار</h2>
+</div>
+
+<div class="notice">
+الإعلان الذي تضيفه يتم حفظه في قاعدة بيانات بيتي على الإنترنت، ويمكن للمستخدمين الآخرين رؤيته بعد نشره.
+</div>
+
+<div class="form">
+<label>نوع العملية</label>
+<select id="aMode">
+<option>بيع</option>
+<option>إيجار</option>
+</select>
+</div>
+
+<div class="form">
+<label>نوع العقار</label>
+<select id="aType">
+<option>بيت</option>
+<option>شقة</option>
+<option>أرض</option>
+<option>محل</option>
+<option>مكتب</option>
+<option>بناية</option>
+</select>
+</div>
+
+<div class="form">
+<label>عنوان الإعلان</label>
+<input id="aTitle" placeholder="مثلاً بيت للبيع في حي الجامعة">
+</div>
+
+<div class="form">
+<label>المحافظة</label>
+<select id="aGov">
+<option>بغداد</option>
+<option>البصرة</option>
+<option>النجف</option>
+<option>كربلاء</option>
+<option>بابل</option>
+<option>ذي قار</option>
+<option>نينوى</option>
+<option>أربيل</option>
+<option>السليمانية</option>
+</select>
+</div>
+
+<div class="form">
+<label>المنطقة</label>
+<input id="aArea" placeholder="المنطقة / الحي">
+</div>
+
+<div class="form">
+<label>السعر بالدينار العراقي</label>
+<input id="aPrice" type="number" placeholder="180000000">
+</div>
+
+<div class="form">
+<label>المساحة بالمتر المربع</label>
+<input id="aSize" type="number" placeholder="200">
+</div>
+
+<div class="form">
+<label>رقم الهاتف</label>
+<input id="aPhone" type="tel" placeholder="07xxxxxxxxx">
+</div>
+
+<div class="form">
+<label>الوصف</label>
+<textarea id="aDesc" placeholder="اكتب تفاصيل العقار..."></textarea>
+</div>
+
+<button class="btn" onclick="addListing()">
+إرسال الإعلان
+</button>
+
+</section>
+
+
+<section id="saved" class="page">
+
+<div class="title">
+<h2>المفضلة ❤️</h2>
+</div>
+
+<div id="savedList" class="cards"></div>
+
+</section>
+
+
+<section id="profile" class="page">
+
+<div class="title">
+<h2>حسابي</h2>
+</div>
+
+<div class="form">
+<h3 style="margin-top:0">مرحباً بك في بيتي 🇮🇶</h3>
+<p class="meta">
+من هنا ستدير إعلاناتك ومفضلاتك وحسابك.
+</p>
+</div>
+
+<button class="btn" onclick="showPage('add')">
+➕ أضف عقارك
+</button>
+
+</section>
+
+</main>
+
+
+<nav class="bottom">
+
+<button class="nav active" onclick="showPage('home',this)">
+<span>⌂</span>الرئيسية
+</button>
+
+<button class="nav" onclick="showPage('search',this)">
+<span>⌕</span>البحث
+</button>
+
+<button class="add" onclick="showPage('add')">
++
+</button>
+
+<button class="nav" onclick="showPage('saved',this)">
+<span>♡</span>المفضلة
+</button>
+
+<button class="nav" onclick="showPage('profile',this)">
+<span>♙</span>حسابي
+</button>
+
+</nav>
+
+</div>
+
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+
+const firebaseConfig = {
+apiKey: "AIzaSyCNyc-nNbi_pl8BnQ8ffoIRDnRTVLpcoZA",
+authDomain: "bayti-fb4f5.firebaseapp.com",
+projectId: "bayti-fb4f5",
+storageBucket: "bayti-fb4f5.firebasestorage.app",
+messagingSenderId: "291377285005",
+appId: "1:291377285005:web:2f069463a2eba34f9a9fc4"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+let listings = [];
+let saved = JSON.parse(localStorage.getItem('bayti_saved') || '[]');
+
+
+function money(n){
+return Number(n || 0).toLocaleString('en-US') + ' د.ع';
+}
+
+
+function safe(text){
+return String(text ?? '')
+.replace(/&/g,'&amp;')
+.replace(/</g,'&lt;')
+.replace(/>/g,'&gt;')
+.replace(/"/g,'&quot;')
+.replace(/'/g,'&#039;');
+}
+
+
+function card(x){
+
+return `
+<div class="card">
+
+<div class="photo">
+${x.emoji || '🏠'}
+</div>
+
+<div class="body">
+
+<span class="badge">
+${safe(x.mode)}
+</span>
+
+<div class="name">
+${safe(x.title)}
+</div>
+
+<div class="meta">
+📍 ${safe(x.area)} - ${safe(x.gov)}
+<br>
+📐 ${x.size || '-'} م²
+</div>
+
+<div class="price">
+${money(x.price)}
+</div>
+
+<div style="display:flex;justify-content:space-between;margin-top:8px">
+
+<button
+onclick="save('${x.id}')"
+style="border:0;background:none;font-size:20px">
+${saved.includes(x.id) ? '❤️' : '♡'}
+</button>
+
+<button
+onclick="details('${x.id}')"
+style="border:0;background:#edf7f2;color:var(--g);border-radius:8px;padding:6px 9px;font-weight:800">
+التفاصيل
+</button>
+
+</div>
+
+</div>
+</div>
+`;
+}
+
+
+function render(){
+
+const featured = listings
+.filter(x => x.featured === true)
+.slice(0,6);
+
+const latest = listings
+.slice()
+.sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0))
+.slice(0,6);
+
+
+document.getElementById('featured').innerHTML =
+featured.map(card).join('') ||
+'<div class="empty">لا توجد عقارات مميزة حالياً.</div>';
+
+
+document.getElementById('latest').innerHTML =
+latest.map(card).join('') ||
+'<div class="empty">لا توجد عقارات مضافة حالياً.<br>كن أول شخص يضيف عقاره 🏠</div>';
+
+
+const savedItems = listings.filter(x => saved.includes(x.id));
+
+document.getElementById('savedList').innerHTML =
+savedItems.map(card).join('') ||
+'<div class="empty">ما عندك عقارات محفوظة بعد ❤️</div>';
+
+}
+
+
+function showPage(id,el){
+
+document.querySelectorAll('.page')
+.forEach(x => x.classList.remove('active'));
+
+document.getElementById(id)
+.classList.add('active');
+
+document.querySelectorAll('.nav')
+.forEach(x => x.classList.remove('active'));
+
+if(el) el.classList.add('active');
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+}
+
+
+function setMode(btn,mode){
+
+document.querySelectorAll('.tab')
+.forEach(x => x.classList.remove('active'));
+
+btn.classList.add('active');
+
+}
+
+
+function quickType(t){
+
+document.getElementById('sType').value = t;
+
+showPage('search');
+
+runSearch();
+
+}
+
+
+function runSearch(){
+
+let g = document.getElementById('sGov').value;
+let t = document.getElementById('sType').value;
+let p = Number(document.getElementById('sPrice').value || Infinity);
+
+let r = listings.filter(x =>
+(!g || x.gov === g) &&
+(!t || x.type === t) &&
+Number(x.price) <= p
+);
+
+document.getElementById('results').innerHTML =
+r.map(card).join('') ||
+'<div class="empty">ما لقينا عقارات مطابقة. جرّب فلترة ثانية.</div>';
+
+}
+
+
+function save(id){
+
+saved = saved.includes(id)
+? saved.filter(x => x !== id)
+: [...saved,id];
+
+localStorage.setItem(
+'bayti_saved',
+JSON.stringify(saved)
+);
+
+render();
+
+}
+
+
+function details(id){
+
+let x = listings.find(a => a.id === id);
+
+if(!x) return;
+
+alert(
+`${x.title}
+
+📍 ${x.area} - ${x.gov}
+💰 ${money(x.price)}
+📐 ${x.size || '-'} م²
+📞 ${x.phone || '-'}
+
+${x.desc || 'لا يوجد وصف'}`
+);
+
+}
+
+
+async function addListing(){
+
+const btn = document.querySelector('#add .btn');
+
+let x = {
+
+mode: document.getElementById('aMode').value,
+
+type: document.getElementById('aType').value,
+
+title: document.getElementById('aTitle').value.trim() || 'عقار جديد',
+
+gov: document.getElementById('aGov').value,
+
+area: document.getElementById('aArea').value.trim() || 'غير محدد',
+
+price: Number(document.getElementById('aPrice').value || 0),
+
+size: Number(document.getElementById('aSize').value || 0),
+
+phone: document.getElementById('aPhone').value.trim(),
+
+desc: document.getElementById('aDesc').value.trim(),
+
+emoji:
+document.getElementById('aType').value === 'أرض'
+? '🌳'
+:
+document.getElementById('aType').value === 'شقة'
+? '🏢'
+:
+document.getElementById('aType').value === 'محل'
+? '🏪'
+:
+document.getElementById('aType').value === 'مكتب'
+? '🏬'
+:
+'🏠',
+
+featured:false,
+
+createdAt: Date.now()
+
+};
+
+
+if(!x.price || !x.phone){
+
+alert('رجاءً أدخل السعر ورقم الهاتف.');
+
+return;
+
+}
+
+
+btn.disabled = true;
+btn.textContent = 'جارٍ حفظ العقار...';
+
+
+try{
+
+const docRef = await db.collection('listings').add(x);
+
+alert('تم حفظ العقار بنجاح ✅');
+
+document.getElementById('aTitle').value = '';
+document.getElementById('aArea').value = '';
+document.getElementById('aPrice').value = '';
+document.getElementById('aSize').value = '';
+document.getElementById('aPhone').value = '';
+document.getElementById('aDesc').value = '';
+
+showPage('home');
+
+}
+catch(error){
+
+console.error(error);
+
+alert(
+'حدث خطأ أثناء حفظ العقار.\n\n' +
+'تأكد من إعدادات Firestore وقواعد الأمان.'
+);
+
+}
+
+btn.disabled = false;
+btn.textContent = 'إرسال الإعلان';
+
+}
+
+
+db.collection('listings')
+.onSnapshot(
+
+snapshot => {
+
+listings = snapshot.docs.map(doc => ({
+id: doc.id,
+...doc.data()
+}));
+
+document.getElementById('connectionStatus').textContent =
+'متصل بقاعدة بيانات بيتي ☁️';
+
+render();
+
+},
+
+error => {
+
+console.error(error);
+
+document.getElementById('connectionStatus').textContent =
+'تعذر الاتصال بقاعدة البيانات ⚠️';
+
+document.getElementById('featured').innerHTML =
+'<div class="empty">تعذر تحميل العقارات حالياً.</div>';
+
+document.getElementById('latest').innerHTML =
+'<div class="empty">تعذر تحميل العقارات حالياً.</div>';
+
+}
+
+);
+
+</script>
+
+</body>
+</html>
